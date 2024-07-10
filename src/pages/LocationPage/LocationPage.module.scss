@@ -1,0 +1,12 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}

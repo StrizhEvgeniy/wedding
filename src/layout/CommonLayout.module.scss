@@ -1,0 +1,14 @@
+.rootLayout {
+  display: flex;
+  height: 100%;
+  background-color: rgb(249, 249, 251);
+}
+
+.content {
+
+  width: 1200px;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  //overflow: auto;
+}

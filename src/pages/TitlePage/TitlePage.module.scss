@@ -1,0 +1,63 @@
+.root {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.title {
+  font-family: "PT Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3rem;
+  line-height: 1.5;
+  word-spacing: 1rem;
+  letter-spacing: 15px;
+
+  &:after {
+    content: "";
+    display: block;
+    width: 35%;
+    height: 1px;
+    background-color: #213547;
+    margin: 1rem auto 2rem;
+  }
+}
+
+.names {
+  font-family: "Cormorant Infant", italic;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 2rem;
+}
+
+.footer {
+  font-family: "Gabriela", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.rightLine {
+  position: relative;
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: -25%;
+    top: 50%;
+    width: 25%;
+    height: 1px;
+    background-color: #213547;
+    transform: rotate(90deg);
+    text-align: right;
+    float: right;
+  }
+}
+
+
