@@ -1,7 +1,20 @@
-.rootLayout {
+.rootLayoutStart {
   display: flex;
   height: 100%;
-  background-color: rgb(249, 249, 251);
+
+  background: url('/up.png') no-repeat;
+  background-size: cover;
+  box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.6);
+
+}
+
+.rootLayoutEnd {
+  display: flex;
+  height: 100%;
+
+  background: url('/down.png') no-repeat;
+  background-size: cover;
+  box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.6);
 }
 
 .content {

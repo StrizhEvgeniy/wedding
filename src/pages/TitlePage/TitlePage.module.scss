@@ -15,6 +15,20 @@
   word-spacing: 1rem;
   letter-spacing: 15px;
 
+  @media (max-width: 450px) {
+    font-size: 1.5rem;
+    text-align: center;
+    word-spacing: 0;
+    letter-spacing: 10px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    text-align: center;
+    word-spacing: 0;
+    letter-spacing: 10px;
+  }
+
   &:after {
     content: "";
     display: block;
@@ -22,6 +36,10 @@
     height: 1px;
     background-color: #213547;
     margin: 1rem auto 2rem;
+
+    @media (max-width: 450px) {
+      width: 25%;
+    }
   }
 }
 
@@ -30,6 +48,11 @@
   font-weight: 300;
   font-style: italic;
   font-size: 2rem;
+  margin-bottom: 30px;
+  @media (max-width: 450px) {
+    font-size: 1.5rem;
+  }
+
 }
 
 .footer {
@@ -41,10 +64,16 @@
   display: flex;
   gap: 2rem;
   justify-content: space-between;
+  margin-top: 30px;
+
+  @media (max-width: 450px) {
+    font-size: 1rem;
+  }
 }
 
 .rightLine {
   position: relative;
+
   &:after {
     content: "";
     display: block;
@@ -58,6 +87,10 @@
     text-align: right;
     float: right;
   }
+}
+
+.img {
+  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 

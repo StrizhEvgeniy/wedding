@@ -2,7 +2,86 @@
   font-family: "Cormorant Infant", italic;
   font-weight: 300;
   font-style: italic;
-  font-size: 3rem;
+  font-size: 3.5rem;
   text-align: center;
-  margin-top: 5%;
+  margin: 5% 0 3% 0;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 5% 0 5% 0;
+  }
+}
+
+.titleNames {
+  font-family: "Cormorant Infant", italic;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 50px;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.formRoot {
+  :global {
+    .ant-form-item {
+      margin-bottom: 12px;
+    }
+
+    .ant-form-item-label {
+      font-size: 18px !important;
+    }
+  }
+
+  font-size: 18px !important;
+}
+
+.leftColumn {
+  width: 50%;
+  margin-left: 10%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-right: 10%;
+  }
+}
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.rightColumn {
+  width: 40%;
+  margin-left: 10%;
+}
+
+.smallInput {
+  :global {
+    .ant-select, .ant-form-item .ant-form-item-control-input {
+      width: 90% !important;
+    }
+  }
+}
+
+.img {
+  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.4);
 }

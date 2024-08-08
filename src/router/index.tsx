@@ -1,6 +1,5 @@
 import {createBrowserRouter} from "react-router-dom";
 import {MainPage} from "../pages/MainPage.tsx";
-import {AnketaPage} from "../pages/AnketaPage/AnketaPage.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -9,6 +8,6 @@ export const router = createBrowserRouter([
   },
   {
     path: ':id',
-    element: <AnketaPage />
+    element: <MainPage />
   }
 ])

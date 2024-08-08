@@ -1,89 +1,176 @@
-import {Button, Flex, Form, Input, Radio, Select, Space} from "antd";
+import {Button, Flex, Form, Image, Input, Radio, Select, Space} from "antd";
 import {CommonLayout} from "../../layout/CommonLayout.tsx";
 
-import style from './AnketaPage.module.scss'
-import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import styles from './AnketaPage.module.scss'
+import {FC, useEffect, useMemo, useState} from "react";
 import {useForm} from "antd/es/form/Form";
+import {useMediaQuery} from "../../lib/hooks";
+import clsx from "clsx";
+import axios from "axios";
+import {getWelcomeById} from "../../mock/welcome.ts";
 
-export const AnketaPage = () => {
-  const {id} = useParams()
-
+export const AnketaPage: FC<{ id?: string }> = ({id}) => {
   const [form] = useForm()
   const [willBe, setWillBe] = useState()
+  const [sayTost, setSayTost] = useState()
 
-  const options = [{
-    label: 'Игристое',
-    value: 'sparkling',
-  },
+  const isMobile = useMediaQuery("(max-width: 768px)")
+
+  const isKnown = useMemo(() => id !== undefined, [id])
+
+  const options = [
     {
-      label: 'Красное',
-      value: 'red',
+      label: 'Игристое',
+      value: 'sparkling',
     },
     {
-      label: 'Белое',
-      value: 'white',
+      label: 'Вино',
+      value: 'vine',
     },
     {
-      label: 'Водка',
-      value: 'vodka',
-    }, {
-      label: 'Джин',
-      value: 'gin',
-    }, {
+      label: 'Крепкое',
+      value: 'machine',
+    },
+    {
       label: 'Не алкоголь',
-      value: 'nonAlc',
-    }]
+      value: 'pussy',
+    }
+  ]
 
   useEffect(() => {
       void form.validateFields()
     }
     , [form, willBe])
 
-  console.log(id)
+  const submit = async (values: {
+    name: string | undefined;
+    companionName: string | undefined;
+    drinks: string[] | undefined;
+    customDrink: string | undefined;
+  }) => {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const response = await axios.post('http://127.0.0.1:5000/create/', {
+        id: id ?? 'none',
+        willBe,
+        name: values.name ?? null,
+        companionName: values.companionName ?? null,
+        drinks: values.drinks ?? null,
+        customDrink: values.customDrink ?? null,
+        sayTost: sayTost ?? null
+      }).catch((e) => console.error(e))
+    } catch {
+      console.log('error')
+    }
+  }
+
   return (
-    <CommonLayout>
-      <Flex style={{height: '100%'}} justify={"space-between"} vertical>
-        <div className={style.title}>Анкета гостя</div>
-        <div>
-          <div className={style.description}>Просим подтвердить ваше <br/> присутствие на торжестве</div>
-          <div className={style.date}>Дата: 05.10.2024</div>
-        </div>
-        <Form layout={"vertical"} form={form}
-              onFinish={(values) => console.log({...values, willBe})}>
-          <Flex style={{width: '100%'}} justify='space-around'>
-            <Space style={{width: '50%', marginLeft: '10%'}} direction='vertical'>
+    <CommonLayout start={false} style={{height: 'fit-content'}}>
+      <Flex style={{height: 'fit-content'}} justify={"space-between"} vertical>
+        {!isKnown && <>
+          <div className={styles.title}>Анкета гостя</div>
+          <Image width='60%' src='/anketa.jpg'/></>}
+        {
+          isKnown && <div className={styles.header}>
+            <div className={styles.title}>Анкета гостя</div>
+            <Image className={styles.img} width='60%' src='/anketa.jpg'/>
+            <div className={styles.titleNames}>{getWelcomeById(id)}</div>
+          </div>
+        }
+
+        <Form layout={"vertical"} form={form} className={styles.formRoot}
+              onFinish={submit}>
+          {isMobile ?
+            <div className={clsx(styles.flexCenter)}><Space className={styles.leftColumn}
+                                                            direction='vertical'>
               <Form.Item label="Планируете ли вы присутствовать"
                          rules={[{required: true, message: 'Это поле обязательно заполнить'}]}>
                 <Radio.Group value={willBe} onChange={(e) => setWillBe(e.target.value)}>
                   <Space direction="vertical">
                     <Radio value={true}>C Удовольствием приду!</Radio>
-                    <Radio value={false}>Не смогу, я булка</Radio>
+                    <Radio value={false}>Не смогу :(</Radio>
                   </Space>
                 </Radio.Group>
-
               </Form.Item>
 
-              <Form.Item name='name' rules={[{required: willBe, message: 'Это поле обязательно заполнить'}]}>
-                <Input placeholder='Имя и Фамилия' variant='borderless'/>
+              {
+                !isKnown &&
+                <Form.Item name='name' rules={[{required: willBe, message: 'Это поле обязательно заполнить'}]}>
+                  <Input placeholder='Имя и Фамилия'/>
+                </Form.Item>
+              }
+
+              <Form.Item
+                label="Если вы будете не одни, заполните поле ниже:" name='companionName'>
+                <Input placeholder='Имя и Фамилия спутника/спутницы'
+                />
               </Form.Item>
 
-              <Form.Item label="Если вы будете не одни, заполните поле ниже:" name='sputnikName'>
-                <Input placeholder='Имя и Фамилия спутника/спутницы' variant='borderless'/>
-              </Form.Item>
-            </Space>
-            <Space style={{width: '40%', marginLeft: '10%'}} direction='vertical'>
               <Form.Item label="Выберите, что будете пить:" name='drinks'
                          rules={[{required: willBe, message: 'Выберите, как минимум один пункт'}]}>
-                <Select mode={'multiple'} allowClear options={options}/>
+                <Select mode={'multiple'} allowClear options={options} size={isMobile ? 'small' : 'middle'}
+                />
               </Form.Item>
-              <Form.Item label="Свой вариант:" name='customDrinks'>
-                <Input placeholder='Что будете пить' variant='borderless'/>
+              <Form.Item label="Свой вариант:" name='customDrink'>
+                <Input placeholder='Что будете пить'/>
+              </Form.Item>
+              <Form.Item label="Хотите ли вы скзаать тост?"
+                         rules={[{required: willBe, message: 'Это поле обязательно заполнить'}]}>
+                <Radio.Group value={sayTost} onChange={(e) => setSayTost(e.target.value)}>
+                  <Space direction="vertical">
+                    <Radio value={true}>Я хочу</Radio>
+                    <Radio value={false}>Нет, я не хочу</Radio>
+                  </Space>
+                </Radio.Group>
               </Form.Item>
             </Space>
+            </div> : <Flex style={{width: '100%'}} justify='space-around'>
+              <Space className={styles.leftColumn} direction='vertical'>
+                <Form.Item label="Планируете ли вы присутствовать"
+                           rules={[{required: true, message: 'Это поле обязательно заполнить'}]}>
+                  <Radio.Group value={willBe} onChange={(e) => setWillBe(e.target.value)}>
+                    <Space direction="vertical">
+                      <Radio value={true}>C Удовольствием приду!</Radio>
+                      <Radio value={false}>Не смогу, я булка</Radio>
+                    </Space>
+                  </Radio.Group>
 
-          </Flex>
+                </Form.Item>
 
+                {
+                  !isKnown &&
+                  <Form.Item name='name' rules={[{required: willBe, message: 'Это поле обязательно заполнить'}]}>
+                    <Input placeholder='Имя и Фамилия'/>
+                  </Form.Item>
+                }
+
+                <Form.Item
+                  label="Если вы будете не одни, заполните поле ниже:" name='companionName'>
+                  <Input placeholder='Имя и Фамилия спутника/спутницы'
+                  />
+                </Form.Item>
+              </Space>
+              <Space className={clsx(styles.rightColumn, isMobile && styles.smallInput)} direction='vertical'>
+                <Form.Item label="Выберите, что будете пить:" name='drinks'
+                           rules={[{required: willBe, message: 'Выберите, как минимум один пункт'}]}>
+                  <Select mode={'multiple'} allowClear options={options} size={isMobile ? 'small' : 'middle'}
+                  />
+                </Form.Item>
+                <Form.Item label="Свой вариант:" name='customDrink'>
+                  <Input placeholder='Что будете пить'/>
+                </Form.Item>
+                <Form.Item label="Хотите ли вы скзаать тост?"
+                           rules={[{required: willBe, message: 'Это поле обязательно заполнить'}]}>
+                  <Radio.Group value={sayTost} onChange={(e) => setSayTost(e.target.value)}>
+                    <Space direction="vertical">
+                      <Radio value={true}>Я хочу</Radio>
+                      <Radio value={false}>Нет, я не хочу</Radio>
+                    </Space>
+                  </Radio.Group>
+                </Form.Item>
+              </Space>
+            </Flex>
+          }
 
           <Flex justify={'center'}>
             <Form.Item>
