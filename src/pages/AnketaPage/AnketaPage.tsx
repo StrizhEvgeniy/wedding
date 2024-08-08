@@ -51,7 +51,7 @@ export const AnketaPage: FC<{ id?: string }> = ({id}) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       // @ts-expect-error: any
-      const response = await axios.post('http://swift-coupling.ru/create/', {
+      const response = await axios.post('http://swift-coupling.ru:5000/create/', {
         id: id ?? 'none',
         willBe,
         name: values.name ?? null,
@@ -133,7 +133,7 @@ export const AnketaPage: FC<{ id?: string }> = ({id}) => {
                   <Radio.Group value={willBe} onChange={(e) => setWillBe(e.target.value)}>
                     <Space direction="vertical">
                       <Radio value={true}>C Удовольствием приду!</Radio>
-                      <Radio value={false}>Не смогу, я булка</Radio>
+                      <Radio value={false}>Не смогу :(</Radio>
                     </Space>
                   </Radio.Group>
 
