@@ -69,9 +69,9 @@ export const AnketaPage: FC<{ id?: string }> = ({id}) => {
   return (
     <CommonLayout start={false} style={{height: 'fit-content'}}>
       <Flex style={{height: 'fit-content'}} justify={"space-between"} vertical>
-        {!isKnown && <>
+        {!isKnown && <div className={styles.header} style={{marginBottom: 50}}>
           <div className={styles.title}>Анкета гостя</div>
-          <Image width='60%' src='/anketa.jpg'/></>}
+          <Image width='60%' src='/anketa.jpg' className={styles.img}/></div>}
         {
           isKnown && <div className={styles.header}>
             <div className={styles.title}>Анкета гостя</div>
@@ -173,7 +173,6 @@ export const AnketaPage: FC<{ id?: string }> = ({id}) => {
               </Space>
             </Flex>
           }
-
           <Flex justify={'center'}>
             <Form.Item>
               <Button htmlType="submit">
