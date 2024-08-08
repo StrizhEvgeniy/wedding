@@ -24,7 +24,9 @@ export function useWindowDimensions() {
 }
 
 function useEventListener(
+  // @ts-expect-error: any
   eventType,
+  // @ts-expect-error: any
   callback,
   element = window
 ) {
@@ -36,6 +38,7 @@ function useEventListener(
 
   useEffect(() => {
     if (element == null) return
+    // @ts-expect-error: any
     const handler = e => callbackRef.current(e)
     element.addEventListener(eventType, handler)
 
@@ -52,6 +55,7 @@ export function useMediaQuery(mediaQuery: string) {
     setMediaQueryList(list)
     setIsMatch(list.matches)
   }, [mediaQuery])
+  // @ts-expect-error: any
   useEventListener("change", e => setIsMatch(e.matches), mediaQueryList)
   return isMatch
 }

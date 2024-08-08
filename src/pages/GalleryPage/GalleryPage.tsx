@@ -1,4 +1,4 @@
-import {Button, Image} from "antd";
+import {Image} from "antd";
 import {useState} from "react";
 import {GalleryModal} from "./GalleryModal.tsx";
 

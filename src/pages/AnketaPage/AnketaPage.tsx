@@ -50,6 +50,7 @@ export const AnketaPage: FC<{ id?: string }> = ({id}) => {
   }) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // @ts-expect-error: any
       const response = await axios.post('http://127.0.0.1:5000/create/', {
         id: id ?? 'none',
         willBe,
@@ -58,7 +59,8 @@ export const AnketaPage: FC<{ id?: string }> = ({id}) => {
         drinks: values.drinks ?? null,
         customDrink: values.customDrink ?? null,
         sayTost: sayTost ?? null
-      }).catch((e) => console.error(e))
+        // @ts-expect-error: any
+      }).catch(() => console.error(response))
     } catch {
       console.log('error')
     }

@@ -30,4 +30,4 @@ const idToWelcome = {
 }
 
 // @ts-expect-error: string as index
-export const getWelcomeById = (id: string) => idToWelcome[id] ?? ''
+export const getWelcomeById = (id: string | undefined) => idToWelcome[id] ?? ''
