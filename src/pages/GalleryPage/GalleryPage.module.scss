@@ -2,12 +2,32 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+
+  @media (max-width: 768px) {
+    gap: 3px;
+  }
+}
+
+.title {
+  font-family: "Cormorant Infant", italic;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 40px;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    text-align: center;
+  }
 }
 
 .root {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 
   margin-top: 60px;
 

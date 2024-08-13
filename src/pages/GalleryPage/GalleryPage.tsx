@@ -11,6 +11,7 @@ export const GalleryPage = () => {
   const width = isMobile ? '35%' : '20%'
   return (
     <div className={styles.root}>
+      <div className={styles.title}>Галерея</div>
       <Image onClick={() => setOpen(true)} className={styles.buttonImg} preview={false} src='/button2.png'
              width={width}/>
       <GalleryModal open={open} onCancel={() => setOpen(false)}/>

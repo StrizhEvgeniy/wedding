@@ -85,7 +85,7 @@ export const AnketaPage: FC<{ id?: string }> = ({id}) => {
           {isMobile ?
             <div className={clsx(styles.flexCenter)}><Space className={styles.leftColumn}
                                                             direction='vertical'>
-              <Form.Item label="Планируете ли вы присутствовать"
+              <Form.Item label="Планируете ли вы присутствовать:"
                          rules={[{required: true, message: 'Это поле обязательно заполнить'}]}>
                 <Radio.Group value={willBe} onChange={(e) => setWillBe(e.target.value)}>
                   <Space direction="vertical">
@@ -116,7 +116,7 @@ export const AnketaPage: FC<{ id?: string }> = ({id}) => {
               <Form.Item label="Свой вариант:" name='customDrink'>
                 <Input placeholder='Что будете пить'/>
               </Form.Item>
-              <Form.Item label="Хотите ли вы скзаать тост?"
+              <Form.Item label="Хотите ли вы сказать тост?"
                          rules={[{required: willBe, message: 'Это поле обязательно заполнить'}]}>
                 <Radio.Group value={sayTost} onChange={(e) => setSayTost(e.target.value)}>
                   <Space direction="vertical">
@@ -128,7 +128,7 @@ export const AnketaPage: FC<{ id?: string }> = ({id}) => {
             </Space>
             </div> : <Flex style={{width: '100%'}} justify='space-around'>
               <Space className={styles.leftColumn} direction='vertical'>
-                <Form.Item label="Планируете ли вы присутствовать"
+                <Form.Item label="Планируете ли вы присутствовать:"
                            rules={[{required: true, message: 'Это поле обязательно заполнить'}]}>
                   <Radio.Group value={willBe} onChange={(e) => setWillBe(e.target.value)}>
                     <Space direction="vertical">
@@ -161,7 +161,7 @@ export const AnketaPage: FC<{ id?: string }> = ({id}) => {
                 <Form.Item label="Свой вариант:" name='customDrink'>
                   <Input placeholder='Что будете пить'/>
                 </Form.Item>
-                <Form.Item label="Хотите ли вы скзаать тост?"
+                <Form.Item label="Хотите ли вы сказать тост?"
                            rules={[{required: willBe, message: 'Это поле обязательно заполнить'}]}>
                   <Radio.Group value={sayTost} onChange={(e) => setSayTost(e.target.value)}>
                     <Space direction="vertical">
