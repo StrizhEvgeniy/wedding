@@ -51,7 +51,7 @@ export const AnketaPage: FC<{ id?: string }> = ({id}) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       // @ts-expect-error: any
-      const response = await axios.post('http://swift-coupling.ru:5000/create/', {
+      const response = await axios.post('http://swift-coupling.ru/api/create/', {
         id: id ?? 'none',
         willBe,
         name: values.name ?? null,
