@@ -15,6 +15,7 @@ const config = (args: AllowedArgs): ArgsProps => ({
   ...args,
   placement: 'bottomLeft',
   className: clsx(styles.root, args.className),
+  // @ts-expect-error: any
   style: {'--duration-seconds': args.duration ?? 0},
 })
 
