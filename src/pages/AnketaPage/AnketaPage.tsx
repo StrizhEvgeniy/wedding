@@ -8,6 +8,7 @@ import {useMediaQuery} from "../../lib/hooks";
 import clsx from "clsx";
 import axios from "axios";
 import {getWelcomeById} from "../../mock/welcome.ts";
+import {errorNotification, successNotification} from "../../lib/notifications/notifications.ts";
 
 export const AnketaPage: FC<{ id?: string }> = ({id}) => {
   const [form] = useForm()
@@ -51,16 +52,16 @@ export const AnketaPage: FC<{ id?: string }> = ({id}) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       // @ts-expect-error: any
-      const response = await axios.post('http://swift-coupling.ru/api/create/', {
+      const response = await axios.post('https://swift-coupling.ru/api/create/', {
         id: id ?? 'none',
         willBe,
         name: values.name ?? null,
         companionName: values.companionName ?? null,
-        drinks: values.drinks ?? null,
+        drinks: values.drinks ?? [],
         customDrink: values.customDrink ?? null,
         sayTost: sayTost ?? null
         // @ts-expect-error: any
-      }).catch(() => console.error(response))
+      }).then(successNotification({message: 'Успешно отправлено'})).catch(errorNotification)
     } catch {
       console.log('error')
     }
